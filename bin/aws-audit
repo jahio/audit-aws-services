@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+#
+# aws-audit
+#
+# Examines and reports current state of your given environment
+# so you can compare it against what other tools might be telling
+# you. Useful for debugging "Depdendency Violation" errors, state
+# mismatch, stale state cache data, etc.
+#
+# See `readme.md` for more information.
+#
+
+#
+# Declare a constant for specifying the application's
+# location on the system. Makes loading stuff way easier
+# over the long term.
+#
+APP_ROOT = File.absolute_path(File.join(File.dirname(__FILE__), '..'))
+
+#
+# Load up the `aws-audit` main file under `lib/aws-audit.rb` and have
+# it continue the bootstrap process. Then we'll instantiate the API
+# and start it up from inside this script after that.
+#
+require File.join(APP_ROOT, 'lib', 'aws-audit.rb')
+
+#
+# Launch the application's overall execution lifecycle.
+#
+AwsAudit::CLI.start(ARGV)
